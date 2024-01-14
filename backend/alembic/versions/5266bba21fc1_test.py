@@ -15,31 +15,6 @@ down_revision = None
 branch_labels = None
 depends_on = None
 
-def migrate_company():
-    op.create_table('company_detail',    
-    op.add_column('company_detail', sa.Column('company', sa.String(), nullable=False)),
-    op.add_column('company_detail', sa.Column('company_url', sa.String(), nullable=False)),
-    op.add_column('company_detail', sa.Column('linkedin_url', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('year_founded', sa.Integer(), nullable=True)),
-    op.add_column('company_detail', sa.Column('employees', sa.Integer(), nullable=True)),
-    op.add_column('company_detail', sa.Column('headcount_direction', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('hq_country', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('hq_city', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('subcategory', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('customer_industries', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('corporate_customers', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('customer_size', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('customer_count', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('tech_stack', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('product_integrations', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('pricing', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('industry_awards', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('industry_events', sa.String(), nullable=True)),
-    op.add_column('company_detail', sa.Column('executive_team', sa.String(), nullable=True))
-    # sa.ForeignKeyConstraint(['category_id'], ['funding_details_id']),
-    # sa.PrimaryKeyConstraint('id')
-    )
-
 def upgrade() -> None:
     op.create_table('categories',
         sa.Column('id', sa.Integer(), primary_key=True),
