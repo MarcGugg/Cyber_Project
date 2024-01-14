@@ -1,0 +1,6 @@
+this is the startup command:
+uvicorn sql_app.main:app --reload
+
+--or--
+
+uvicorn main:app --reload
