@@ -85,6 +85,6 @@ def get_companies(db: Session = Depends(get_db)):
 
     
     if companies:
-        return companies
+        return [company.to_dict_inclusive() for company in companies]
     
     return None
