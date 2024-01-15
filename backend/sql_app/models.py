@@ -36,6 +36,16 @@ class Category(Base):
 
     company_details = relationship('CompanyDetail', back_populates='category')
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'categoryName': self.category,
+            'logoFile': self.logo_file,
+            'logoUrl': self.logo_url,
+            'logoOld': self.logo_old,
+            'logoNew': self.logo_new
+        }
+
 class FundingDetails(Base):
     __tablename__ = 'funding_details'
 
@@ -61,6 +71,40 @@ class FundingDetails(Base):
     company_detail = relationship('CompanyDetail', back_populates='funding_details', foreign_keys=[company_detail_id])
     # company_detail = relationship('CompanyDetail', back_populates='funding_details', foreign_keys=[company_detail_id], remote_side='CompanyDetail.id')
 
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'logo': self.logo,
+            'company': self.company,
+            'amountRaised': self.amount_raised,
+            'dateOfFunding': self.date_of_funding,
+            'fundingRound': self.funding_round,
+            'ceo': self.ceo,
+            'totalAmountRaised': self.total_amount_raised,
+            'category': self.category,
+            'established': self.established,
+            'location': self.location,
+            'emplpyees': self.employees,
+            'leadInvestor': self.lead_investor
+        }
+    def to_dict_inclusive(self):
+        return {
+            'id': self.id,
+            'logo': self.logo,
+            'company': self.company,
+            'amountRaised': self.amount_raised,
+            'dateOfFunding': self.date_of_funding,
+            'fundingRound': self.funding_round,
+            'ceo': self.ceo,
+            'totalAmountRaised': self.total_amount_raised,
+            'category': self.category,
+            'established': self.established,
+            'location': self.location,
+            'emplpyees': self.employees,
+            'leadInvestor': self.lead_investor,
+            'companyDetail': self.company_detail.to_dict()
+        }
 
 class CompanyDetail(Base):
     __tablename__ = "company_detail"
@@ -92,6 +136,56 @@ class CompanyDetail(Base):
     
     category = relationship('Category', back_populates='company_details', foreign_keys=[category_id])
     funding_details = relationship('FundingDetails', back_populates='company_detail')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'companyName': self.company,
+            'companyUrl': self.company_url,
+            'linkedinUrl': self.linkedin_url,
+            'yearFounded': self.year_founded,
+            'employees': self.employees,
+            'headcountDirection': self.headcount_direction,
+            'hqCountry': self.hq_country,
+            'hqCity': self.hq_city,
+            'subcategory': self.subcategory,
+            'customerIndustries': self.customer_industries,
+            'corporateCustomers': self.corporate_customers,
+            'customerSize': self.customer_size,
+            'customerCount': self.customer_count,
+            'techStack': self.tech_stack,
+            'productIntegrations': self.product_integrations,
+            'pricing': self.pricing,
+            'industryAwards': self.industry_awards,
+            'industryEvents': self.industry_events,
+            'executiveTeam': self.executive_team
+        }
+    
+    def to_dict_inclusive(self):
+        return {
+            'id': self.id,
+            'companyName': self.company,
+            'companyUrl': self.company_url,
+            'linkedinUrl': self.linkedin_url,
+            'yearFounded': self.year_founded,
+            'employees': self.employees,
+            'headcountDirection': self.headcount_direction,
+            'hqCountry': self.hq_country,
+            'hqCity': self.hq_city,
+            'subcategory': self.subcategory,
+            'customerIndustries': self.customer_industries,
+            'corporateCustomers': self.corporate_customers,
+            'customerSize': self.customer_size,
+            'customerCount': self.customer_count,
+            'techStack': self.tech_stack,
+            'productIntegrations': self.product_integrations,
+            'pricing': self.pricing,
+            'industryAwards': self.industry_awards,
+            'industryEvents': self.industry_events,
+            'executiveTeam': self.executive_team,
+            'category': self.category.to_dict(),
+            'fundingDetails': self.funding_details.to_dict()
+        }
 
 
 
