@@ -5,13 +5,31 @@ from sql_app.models import CompanyDetail, FundingDetails, Category
 fake = Faker()
 
 def seed_data(db: Session):
+    for _ in range(10):
+
+        category = Category(
+            category=fake.word(),
+            logo_file=fake.file_name(extension="png"),
+            logo_url=fake.url(),
+            logo_old=fake.url(),
+            logo_new=fake.url(),
+        )
+
+        db.add(category)
     
+    db.commit()
+
+    existing_categories = db.query(Category).all()
+
     for _ in range(10):  # Adjust the number as needed
         
+        curr_category = fake.random_element(existing_categories)
+
         company_detail = CompanyDetail(
             company=fake.company(),
             company_url=fake.url(),
             linkedin_url=fake.url() if fake.boolean(chance_of_getting_true=50) else None,
+            category=curr_category,
             year_founded=fake.random_int(min=1900, max=2022),
             employees=fake.random_int(min=1, max=10000),
             headcount_direction=fake.random_element(elements=("Up", "Down", "Stable")),
@@ -32,23 +50,17 @@ def seed_data(db: Session):
 
         db.add(company_detail)
     
-    for _ in range(10):
-    
-        category = Category(
-            category=fake.word(),
-            logo_file=fake.file_name(extension="png"),
-            logo_url=fake.url(),
-            logo_old=fake.url(),
-            logo_new=fake.url(),
-        )
+    db.commit()
 
-        db.add(category)
+    existing_company_details = db.query(CompanyDetail).all()
 
     for _ in range(10):
+
+        company_detail = fake.random_element(existing_company_details)
     
         funding_details = FundingDetails(
             logo=fake.url(),  # Assuming logo is a URL, adjust accordingly
-            company=fake.company(),
+            company=company_detail.company,
             amount_raised=fake.random_int(min=100000, max=10000000),
             date_of_funding=fake.date_this_decade(),
             funding_round=fake.random_element(elements=("Seed", "Series A", "Series B", "Series C")),
@@ -63,8 +75,8 @@ def seed_data(db: Session):
 
         db.add(funding_details)
 
-    
     db.commit()
+    
         
 if __name__ == "__main__":
     # This block ensures that the seeding script is executed only when run directly

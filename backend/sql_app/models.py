@@ -90,7 +90,7 @@ class CompanyDetail(Base):
     category_id = Column(Integer, ForeignKey('categories.id'))
     # funding_details_id = Column(Integer, ForeignKey('funding_details.id'))
     
-    category = relationship('Category', back_populates='company_details')
+    category = relationship('Category', back_populates='company_details', foreign_keys=[category_id])
     funding_details = relationship('FundingDetails', back_populates='company_detail')
 
 

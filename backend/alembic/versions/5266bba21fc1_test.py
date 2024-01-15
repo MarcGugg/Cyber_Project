@@ -63,14 +63,16 @@ def upgrade() -> None:
         sa.Column('industry_events', sa.String(), nullable=True),
         sa.Column('executive_team', sa.String(), nullable=True),
         sa.Column('category_id', sa.Integer(), sa.ForeignKey('categories.id')),
+        sa.Column('category', sa.String()),
         # sa.Column('funding_details_id', sa.Integer(), sa.ForeignKey('funding_details.id')),
         sa.ForeignKeyConstraint(['category_id'], ['categories.id']),
         # sa.ForeignKeyConstraint(['funding_details_id'], ['funding_details.id']),
         sa.PrimaryKeyConstraint('id')
     )
 
-    op.add_column('funding_details', sa.Column('company_detail_id', sa.Integer(), sa.ForeignKey('company_detail.id')))
-    # op.add_column('company_detail', sa.Column('category_id', sa.Integer(), sa.ForeignKey('categories.id')))
+    op.add_column('funding_details', sa.Column('company_detail_id', sa.Integer(), sa.ForeignKey('company_detail.id'))) #this line is necessary for the seeders to work
+    
+    op.add_column('company_detail', sa.Column('category_id', sa.Integer(), sa.ForeignKey('categories.id')))
     # op.add_column('company_detail', sa.Column('funding_details_id', sa.Integer(), sa.ForeignKey('funding_details.id')))
 
     # op.create_foreign_key('fk_company_detail_category_id', 'company_detail', 'categories', ['category_id'], ['id'])
