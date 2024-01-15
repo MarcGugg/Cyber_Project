@@ -140,7 +140,7 @@ class CompanyDetail(Base):
     def to_dict(self):
         return {
             'id': self.id,
-            'companyName': self.company,
+            'company': self.company,
             'companyUrl': self.company_url,
             'linkedinUrl': self.linkedin_url,
             'yearFounded': self.year_founded,
@@ -164,7 +164,7 @@ class CompanyDetail(Base):
     def to_dict_inclusive(self):
         return {
             'id': self.id,
-            'companyName': self.company,
+            'company': self.company,
             'companyUrl': self.company_url,
             'linkedinUrl': self.linkedin_url,
             'yearFounded': self.year_founded,
@@ -184,7 +184,7 @@ class CompanyDetail(Base):
             'industryEvents': self.industry_events,
             'executiveTeam': self.executive_team,
             'category': self.category.to_dict(),
-            'fundingDetails': self.funding_details.to_dict()
+            'fundingDetails': [funding.to_dict() for funding in self.funding_details]
         }
 
 

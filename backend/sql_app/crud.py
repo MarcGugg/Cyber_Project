@@ -45,9 +45,10 @@ def get_all_companies(db: Session):
     if not companies:
         return []
 
-    companies_as_dict = [company.dict() for company in companies]
+    companies_as_dict = [company.to_dict_inclusive() for company in companies]
 
-    return {'CompanyDetail': companies_as_dict}
+    # return {'CompanyDetail': companies_as_dict}
+    return companies_as_dict
     # if companies:
     #     return companies
     

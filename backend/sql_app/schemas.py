@@ -39,6 +39,10 @@ class CompanyDetailBase(BaseModel):
     industry_events: Optional[str] = None
     executive_team: Optional[str] = None
 
+    class Config:
+        alias_generator = lambda x: x[0].lower() + x[1:]
+        allow_population_by_field_name = True
+
 class CompanyDetailCreate(CompanyDetailBase):
     pass
 

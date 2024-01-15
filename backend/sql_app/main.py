@@ -82,9 +82,22 @@ def get_companies(db: Session = Depends(get_db)):
     print("")
     print("")
     companies = crud.get_all_companies(db)
+    print('')
+    print('')
+    print('')
+    print('')
+    print('')
+    print('COMPANIES', companies[0])
+    print('')
+    print('')
+    print('')
+    print('')
+    print('')
 
     
     if companies:
-        return [company.to_dict_inclusive() for company in companies]
+        # return [company.to_dict_inclusive() for company in companies]
+        # return companies['CompanyDetail']
+        return companies
     
     return None
