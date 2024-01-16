@@ -1,35 +1,30 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-// http://127.0.0.1:8000
 export default function Home() {
-    const [data, setData] = useState(null)
-    let res = ''
+    const [data, setData] = useState(null);
+
     useEffect(() => {
-        
         async function fetchData() {
-            res = await axios("http://127.0.0.1:8000/companies", {
-                method: 'GET',
-                // headers: {'Content-Type':'Access-Control-Allow-Origin'}
-            })
+            try {
+                const response = await axios.get("http://127.0.0.1:8000/companies");
+                setData(response.data);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                // Handle error if needed
+            }
         }
-        
-        fetchData()
 
-    }, [data])
-
-    if (res) {
-        setData(res)
-    }
+        fetchData();
+    }, []); // Pass an empty dependency array to run the effect only once when the component mounts
 
     return (
         <>
-        {data ? 
-        <p>These are the companies</p>
-        : 
-        <p>There are no companies</p>
-        }
+            {data ? 
+                <p>These are the companies</p>
+                : 
+                <p>There are no companies</p>
+            }
         </>
-    )
+    );
 }
