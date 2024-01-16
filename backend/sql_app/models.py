@@ -85,7 +85,7 @@ class FundingDetails(Base):
             'category': self.category,
             'established': self.established,
             'location': self.location,
-            'emplpyees': self.employees,
+            'employees': self.employees,
             'leadInvestor': self.lead_investor
         }
     def to_dict_inclusive(self):
@@ -101,7 +101,7 @@ class FundingDetails(Base):
             'category': self.category,
             'established': self.established,
             'location': self.location,
-            'emplpyees': self.employees,
+            'employees': self.employees,
             'leadInvestor': self.lead_investor,
             'companyDetail': self.company_detail.to_dict()
         }
