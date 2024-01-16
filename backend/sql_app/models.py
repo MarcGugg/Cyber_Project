@@ -39,7 +39,7 @@ class Category(Base):
     def to_dict(self):
         return {
             'id': self.id,
-            'categoryName': self.category,
+            'category': self.category,
             'logoFile': self.logo_file,
             'logoUrl': self.logo_url,
             'logoOld': self.logo_old,

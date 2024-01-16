@@ -1,14 +1,14 @@
 from typing import Union, List, Optional, Any
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 
 class CategoryBase(BaseModel):
     category: str
-    logo_file: Optional[str] = None
-    logo_url: Optional[str] = None
-    logo_old: Optional[str] = None
-    logo_new: Optional[str] = None
+    logo_file: Optional[str] = Field(alias='logoFile')
+    logo_url: Optional[str] = Field(alias='logoUrl')
+    logo_old: Optional[str] = Field(alias='logoOld')
+    logo_new: Optional[str] = Field(alias='logoNew')
 
 class CategoryCreate(CategoryBase):
     pass
@@ -20,24 +20,24 @@ class Category(CategoryBase):
 
 class CompanyDetailBase(BaseModel):
     company: str
-    company_url: str
-    linkedin_url: Optional[str] = None
-    year_founded: Optional[int] = None
+    company_url: str = Field(alias='companyUrl')
+    linkedin_url: Optional[str] = Field(alias='linkedinUrl')
+    year_founded: Optional[int] = Field(alias='yearFounded')
     employees: Optional[int] = None
-    headcount_direction: Optional[str] = None
-    hq_country: Optional[str] = None
-    hq_city: Optional[str] = None
+    headcount_direction: Optional[str] = Field(alias='headcountDirection')
+    hq_country: Optional[str] = Field(alias='hqCountry')
+    hq_city: Optional[str] = Field(alias='hqCity')
     subcategory: Optional[str] = None
-    customer_industries: Optional[str] = None
-    corporate_customers: Optional[str] = None
-    customer_size: Optional[str] = None
-    customer_count: Optional[str] = None
-    tech_stack: Optional[str] = None
-    product_integrations: Optional[str] = None
+    customer_industries: Optional[str] = Field(alias='customerIndustries')
+    corporate_customers: Optional[str] = Field(alias='corporateCustomers')
+    customer_size: Optional[str] = Field(alias='customerSize')
+    customer_count: Optional[str] = Field(alias='customerCount')
+    tech_stack: Optional[str] = Field(alias='techStack')
+    product_integrations: Optional[str] = Field(alias='productIntegrations')
     pricing: Optional[str] = None
-    industry_awards: Optional[str] = None
-    industry_events: Optional[str] = None
-    executive_team: Optional[str] = None
+    industry_awards: Optional[str] = Field(alias='industryAwards')
+    industry_events: Optional[str] = Field(alias='industryEvents')
+    executive_team: Optional[str] = Field(alias='executiveTeam')
 
     class Config:
         alias_generator = lambda x: x[0].lower() + x[1:]
@@ -55,19 +55,28 @@ class CompanyDetail(CompanyDetailBase):
     class Config:
         orm_mode = True
 
+    class Config:
+        alias_generator = lambda x: x[0].lower() + x[1:]
+
+    class Config:
+        fields = {
+            "funding_details": "fundingDetails"
+            # Add more aliases as needed for other fields
+        }
+
 
 class FundingDetailBase(BaseModel):
     logo: Optional[str] = None
-    amount_raised: Optional[str] = None
-    date_of_funding: str
-    funding_round: str
+    amount_raised: Optional[str] = Field(alias='amountRaised')
+    date_of_funding: str = Field(alias='dateOfFunding')
+    funding_round: str = Field(alias='fundingRound')
     ceo: Optional[str] = None
-    total_amount_raised: Optional[str] = None
+    total_amount_raised: Optional[str] = Field(alias='totalAmountRaised')
     category: Optional[str] = None
     established: Optional[int] = None
     location: Optional[str] = None
     employees: Optional[int] = None
-    lead_investor: Optional[str] = None
+    lead_investor: Optional[str] = Field(alias='leadInvestor')
 
 class FundingDetailCreate(FundingDetailBase):
     pass

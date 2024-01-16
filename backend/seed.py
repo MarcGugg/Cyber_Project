@@ -71,6 +71,7 @@ def seed_data(db: Session):
             location=fake.city(),
             employees=fake.random_int(min=1, max=10000),
             lead_investor=fake.name(),
+            company_detail=company_detail
         )
 
         db.add(funding_details)
