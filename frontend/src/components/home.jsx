@@ -20,8 +20,13 @@ export default function Home() {
 
     return (
         <>
-            {data ? 
-                <p>These are the companies</p>
+            {data ?
+                <div>
+                    <p>These are the companies</p>
+                    {data.map(company => {
+                        <div>{company.name}</div>
+                    })}
+                </div> 
                 : 
                 <p>There are no companies</p>
             }
