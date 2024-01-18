@@ -52,7 +52,7 @@ class FundingDetails(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     logo = Column(String(150))
     #company = db.Column(db.String(150), db.ForeignKey('companydetail.company'), primary_key=True)
-    company = Column(String(150))
+    # company = Column(String(150))
     amount_raised = Column(String(150))
     date_of_funding = Column(String(150))
     funding_round = Column(String(150))
@@ -68,7 +68,7 @@ class FundingDetails(Base):
     company_detail_id = Column(Integer, ForeignKey('company_detail.id'))
 
 
-    company_detail = relationship('CompanyDetail', back_populates='funding_details', foreign_keys=[company_detail_id])
+    company = relationship('CompanyDetail', back_populates='funding_details', foreign_keys=[company_detail_id])
     # company_detail = relationship('CompanyDetail', back_populates='funding_details', foreign_keys=[company_detail_id], remote_side='CompanyDetail.id')
 
 
@@ -135,7 +135,7 @@ class CompanyDetail(Base):
     # funding_details_id = Column(Integer, ForeignKey('funding_details.id'))
     
     category = relationship('Category', back_populates='company_details', foreign_keys=[category_id])
-    funding_details = relationship('FundingDetails', back_populates='company_detail')
+    funding_details = relationship('FundingDetails', back_populates='company')
 
     def to_dict(self):
         return {

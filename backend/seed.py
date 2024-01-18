@@ -60,7 +60,7 @@ def seed_data(db: Session):
     
         funding_details = FundingDetails(
             logo=fake.url(),  # Assuming logo is a URL, adjust accordingly
-            company=company_detail.company,
+            # company=company_detail.company,
             amount_raised=fake.random_int(min=100000, max=10000000),
             date_of_funding=fake.date_this_decade(),
             funding_round=fake.random_element(elements=("Seed", "Series A", "Series B", "Series C")),
@@ -71,7 +71,7 @@ def seed_data(db: Session):
             location=fake.city(),
             employees=fake.random_int(min=1, max=10000),
             lead_investor=fake.name(),
-            company_detail=company_detail
+            company=company_detail
         )
 
         db.add(funding_details)

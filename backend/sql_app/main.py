@@ -88,7 +88,7 @@ def get_companies(db: Session = Depends(get_db)):
     print('')
     print('')
     print('')
-    print('COMPANIES', companies[0])
+    print('COMPANIES', companies)
     print('')
     print('')
     print('')

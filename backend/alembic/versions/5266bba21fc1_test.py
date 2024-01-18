@@ -28,7 +28,7 @@ def upgrade() -> None:
     op.create_table('funding_details',
         sa.Column('id', sa.Integer(), primary_key=True),
         sa.Column('logo', sa.String()),
-        sa.Column('company', sa.String()),
+        # sa.Column('company', sa.String()),
         sa.Column('amount_raised', sa.String()),
         sa.Column('date_of_funding', sa.String()),
         sa.Column('funding_round', sa.String()),
