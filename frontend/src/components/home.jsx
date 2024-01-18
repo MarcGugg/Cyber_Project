@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { NavLink } from "react-router-dom";
 
 export default function Home() {
     const [data, setData] = useState(null);
@@ -24,7 +25,9 @@ export default function Home() {
                 <div>
                     <p>These are the companies</p>
                     {data.map(company => {
-                        <div>{company.name}</div>
+                        <NavLink to={`/companies/${company.id}`}>
+                            <p>{company.name}</p>
+                        </NavLink>
                     })}
                 </div> 
                 : 
