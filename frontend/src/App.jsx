@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Home from './components/home'
+import oneCompany from './components/oneCompany'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={ <Home /> }/>
+        <Route path='/:companyId' element={ <oneCompany />} />
       </Routes>
     </div>
     // <>
