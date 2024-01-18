@@ -102,3 +102,11 @@ def get_companies(db: Session = Depends(get_db)):
         return companies
     
     return None
+
+
+@app.get("/companies/{company_id}", response_model=schemas.CompanyDetail)
+def get_company(company_id: int, db: Session = Depends(get_db)):
+    company = crud.get_one_company(db, company_id = company_id)
+
+    if company:
+        return company

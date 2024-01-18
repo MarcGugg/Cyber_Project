@@ -53,3 +53,15 @@ def get_all_companies(db: Session):
     #     return companies
     
     # return None
+
+def get_one_company(db: Session, company_id: int):
+    company = db.query(models.CompanyDetail).get(company_id)
+
+    company_as_dict = company.to_dict_inclusive()
+
+    if company:
+        
+        return company_as_dict
+    
+    return None
+        
