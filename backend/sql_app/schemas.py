@@ -19,6 +19,7 @@ class Category(CategoryBase):
 
 
 class CompanyDetailBase(BaseModel):
+    id: int
     company: str
     company_url: str = Field(alias='companyUrl')
     linkedin_url: Optional[str] = Field(alias='linkedinUrl')

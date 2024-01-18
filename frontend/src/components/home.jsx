@@ -19,16 +19,20 @@ export default function Home() {
         fetchData();
     }, []); // Pass an empty dependency array to run the effect only once when the component mounts
 
+    useEffect(() => {
+        console.log('companies', data)
+    }, [data])
+
     return (
         <>
             {data ?
                 <div>
                     <p>These are the companies</p>
-                    {data.map(company => {
-                        <NavLink to={`/companies/${company.id}`}>
-                            <p>{company.name}</p>
+                    {data.map(company => (
+                        <NavLink key={company.id} to={`/companies/${company.id}`}>
+                            <p key={company.id}>{company.company}</p>
                         </NavLink>
-                    })}
+                    ))}
                 </div> 
                 : 
                 <p>There are no companies</p>
