@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-export default function oneCompany() {
+export default function OneCompany() {
 
     const {companyId} = useParams() //companyId will be used to fetch company from the backend
 
@@ -21,6 +21,10 @@ export default function oneCompany() {
 
         fetchData();
     }, []); // Pass an empty dependency array to run the effect only once when the component mounts
+
+    useState(() => {
+        console.log('company', data)
+    }, [data])
 
     return (
         <>
