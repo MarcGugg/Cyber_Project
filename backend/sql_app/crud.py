@@ -65,3 +65,18 @@ def get_one_company(db: Session, company_id: int):
     
     return None
         
+def get_funding(db: Session, funding_id: int):
+    funding = db.query(models.FundingDetails).get(funding_id)
+
+    funding_dict = funding.to_dict()
+
+    print("")
+    print("")
+    print("")
+    print("FUNDING FROM CRUD", funding_dict)
+    print("")
+    print("")
+
+    if funding:
+        return funding_dict
+    return None

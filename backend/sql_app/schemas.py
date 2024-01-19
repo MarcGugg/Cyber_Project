@@ -51,7 +51,7 @@ class CompanyDetail(CompanyDetailBase):
     # category: Any  # Use Any for flexibility
     # funding_details: List[Any] = []  # Use Any for flexibility
     category: Category
-    funding_details: List["FundingDetail"] = []
+    funding_details: List["FundingDetails"] = []
 
     class Config:
         orm_mode = True
@@ -66,7 +66,7 @@ class CompanyDetail(CompanyDetailBase):
         }
 
 
-class FundingDetailBase(BaseModel):
+class FundingDetailsBase(BaseModel):
     logo: Optional[str] = None
     amount_raised: Optional[str] = Field(alias='amountRaised')
     date_of_funding: str = Field(alias='dateOfFunding')
@@ -79,11 +79,11 @@ class FundingDetailBase(BaseModel):
     employees: Optional[int] = None
     lead_investor: Optional[str] = Field(alias='leadInvestor')
 
-class FundingDetailCreate(FundingDetailBase):
+class FundingDetailsCreate(FundingDetailsBase):
     pass
 
-class FundingDetail(FundingDetailBase):
-    company: CompanyDetail
+class FundingDetails(FundingDetailsBase):
+    company: Optional[CompanyDetail] = None
 
     class Config:
         orm_mode = True

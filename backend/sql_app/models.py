@@ -76,7 +76,6 @@ class FundingDetails(Base):
         return {
             'id': self.id,
             'logo': self.logo,
-            'company': self.company,
             'amountRaised': self.amount_raised,
             'dateOfFunding': self.date_of_funding,
             'fundingRound': self.funding_round,
@@ -92,7 +91,6 @@ class FundingDetails(Base):
         return {
             'id': self.id,
             'logo': self.logo,
-            'company': self.company,
             'amountRaised': self.amount_raised,
             'dateOfFunding': self.date_of_funding,
             'fundingRound': self.funding_round,
@@ -103,7 +101,7 @@ class FundingDetails(Base):
             'location': self.location,
             'employees': self.employees,
             'leadInvestor': self.lead_investor,
-            'companyDetail': self.company_detail.to_dict()
+            'company': self.company.to_dict()
         }
 
 class CompanyDetail(Base):

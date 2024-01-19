@@ -110,3 +110,20 @@ def get_company(company_id: int, db: Session = Depends(get_db)):
 
     if company:
         return company
+    
+@app.get("/funding/{funding_id}", response_model=schemas.FundingDetails)
+def get_funding(funding_id: int, db: Session = Depends(get_db)):
+    funding = crud.get_funding(db, funding_id=funding_id)
+
+    print("")
+    print("")
+    print("")
+    print("")
+    print("FUNDING FROM MAIN", funding)
+    print("")
+    print("")
+    print("")
+
+    if funding:
+        return funding
+    return None
