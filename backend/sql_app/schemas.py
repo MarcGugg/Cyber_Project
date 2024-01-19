@@ -42,7 +42,8 @@ class CompanyDetailBase(BaseModel):
 
     class Config:
         alias_generator = lambda x: x[0].lower() + x[1:]
-        allow_population_by_field_name = True
+        # allow_population_by_field_name = True
+        populate_by_name = True
 
 class CompanyDetailCreate(CompanyDetailBase):
     pass
@@ -51,7 +52,7 @@ class CompanyDetail(CompanyDetailBase):
     # category: Any  # Use Any for flexibility
     # funding_details: List[Any] = []  # Use Any for flexibility
     category: Category
-    funding_details: List["FundingDetails"] = []
+    fundingDetails: List["FundingDetails"] = []
 
     class Config:
         orm_mode = True

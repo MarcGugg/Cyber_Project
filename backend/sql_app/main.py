@@ -1,4 +1,5 @@
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
 from . import crud, models
@@ -71,7 +72,16 @@ def get_db():
 #     return items
 
 
+# HELPER FUNCTIONS TO GET FUNDING DETAILS TO RETURN IN CAMEL CASE
+##############################################################
+def to_camel_case(string):
+    parts = iter(string.split("_"))
+    return next(parts) + "".join(i.capitalize() for i in parts)
 
+class CamelCaseResponse(JSONResponse):
+    def render(self, content):
+        return super().render({to_camel_case(k): v for k, v in content.items()})
+##############################################################
 
 @app.get("/companies", response_model=list[schemas.CompanyDetail])
 def get_companies(db: Session = Depends(get_db)):
@@ -103,8 +113,8 @@ def get_companies(db: Session = Depends(get_db)):
     
     return None
 
-
-@app.get("/companies/{company_id}", response_model=schemas.CompanyDetail)
+    
+@app.get("/companies/{company_id}", response_model=schemas.CompanyDetail, response_class=CamelCaseResponse)
 def get_company(company_id: int, db: Session = Depends(get_db)):
     company = crud.get_one_company(db, company_id = company_id)
 
