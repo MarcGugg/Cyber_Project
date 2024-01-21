@@ -60,11 +60,10 @@ export default function Home() {
         <>
             {data ?
                 <div>
-                    <p>These are the companies</p>
                     {companiesArray ?        
                       <div style={{ width: 200, margin: 20 }}>
                       <h2>Search for a company</h2>
-                      <div style={{ marginBottom: 20 }}>Try to type a company name</div>
+                      {/* <div style={{ marginBottom: 20 }}>Try to type a company name</div> */}
                       <ReactSearchAutocomplete
                         items={companiesArray}
                         maxResults={5}

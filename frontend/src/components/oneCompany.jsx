@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route, useParams, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Tab } from '@mui/material';
+import Button from '@mui/material/Button';
 
 export default function OneCompany() {
 
@@ -37,6 +38,9 @@ export default function OneCompany() {
 
     return (
         <>
+        <Button variant="outlined">
+            <NavLink to={`/`}>Home</NavLink>
+        </Button>
         {company ? 
         <div>
 
