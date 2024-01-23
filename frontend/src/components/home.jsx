@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom"; //useNavigate is instead of useHistory in react-router-dom v6 and up
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 // import { useHistory } from "react-router-dom";
 
 
 export default function Home() {
-    // let history = useHistory()
+    let history = useNavigate()
 
     const [data, setData] = useState(null);
     const [companiesArray, setCompaniesArray] = useState(null)
@@ -49,7 +49,7 @@ export default function Home() {
 
     const handleOnSelect = (item) => {
         console.log(item.name);
-        // history.push(`/companies/${item.id}`)
+        history(`/companies/${item.id}`)
     };
 
     const handleOnFocus = () => {
