@@ -76,6 +76,9 @@ def seed_data(db: Session):
 
         db.add(funding_details)
     
+
+    db.commit()
+    
     # POTENTIAL LOGIC FOR EXECUTIVE TEAM SEEDERS
     
     # for loop of 10 (or however many companies exist in the db):
@@ -94,8 +97,6 @@ def seed_data(db: Session):
             # remove used position from executive position list to avoid re-use in same company 
             # (i.e company can't have 2 CEOs)
             # remove random_company_variable from companies list to avoid re-use of same company
-
-    db.commit()
     
         
 if __name__ == "__main__":
