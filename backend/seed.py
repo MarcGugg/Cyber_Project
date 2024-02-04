@@ -81,13 +81,13 @@ def seed_data(db: Session):
     
     # POTENTIAL LOGIC FOR EXECUTIVE TEAM SEEDERS
     
+    # instantiate a list containing all companies
     # for loop of 10 (or however many companies exist in the db):
-        # instantiate a list containing all companies
         # instantiate a list of strings - executive postions ['CEO', 'CFO', 'President', ....etc]
 
 
+        # random_company_variable = select a random company in companies list
         # nested for loop - the loop runs as many times as the executive position list has elements:
-            # random_company_variable = select a random company in companies list
         
             # create a new executive:
                 # name = fake.name()
@@ -96,7 +96,9 @@ def seed_data(db: Session):
 
             # remove used position from executive position list to avoid re-use in same company 
             # (i.e company can't have 2 CEOs)
-            # remove random_company_variable from companies list to avoid re-use of same company
+            
+        # remove random_company_variable from companies list to avoid re-use of same company
+            
     
         
 if __name__ == "__main__":
