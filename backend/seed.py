@@ -101,7 +101,7 @@ def seed_data(db: Session):
     for _ in range(len(existing_company_details)):
         titles = ['CEO', 'CFO', 'President']
         random_company = fake.random_element(existing_company_details)
-        title = random.choice(titles)
+        # title = random.choice(titles)
 
         for title in titles:
 
