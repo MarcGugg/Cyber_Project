@@ -91,6 +91,31 @@ class FundingDetails(FundingDetailsBase):
 
 
 
+
+class ExecutiveBase(BaseModel):
+    name: str
+    title: str
+
+class ExecutiveCreate(ExecutiveBase):
+    pass
+
+class Executive(ExecutiveBase):
+    id: int
+    company_detail_id: Optional[int]  # Assuming this is nullable
+
+    class Config:
+        orm_mode = True
+
+class ExecutiveWithCompany(BaseModel):
+    id: int
+    name: str
+    title: str
+    company: CompanyDetail  # Assuming you have already defined the CompanyDetail Pydantic model
+
+    class Config:
+        orm_mode = True
+
+
 # class ItemBase(BaseModel):
 #     title: str
 #     description: Union[str, None] = None

@@ -1,6 +1,7 @@
 from faker import Faker
 from sqlalchemy.orm import Session
-from sql_app.models import CompanyDetail, FundingDetails, Category
+from sql_app.models import CompanyDetail, FundingDetails, Category, Executive
+import random
 
 fake = Faker()
 
@@ -98,7 +99,25 @@ def seed_data(db: Session):
             # (i.e company can't have 2 CEOs)
             
         # remove random_company_variable from companies list to avoid re-use of same company
-            
+    for _ in range(len(existing_company_details)):
+        titles = ['CEO', 'CFO', 'President']
+        random_company = fake.random_element(existing_company_details)
+        title = random.choice(titles)
+
+        for title in titles:
+
+            new_executive = Executive(
+                name = fake.name(),
+                title = title,
+                company = random_company
+            )
+
+            # titles.remove(title)
+            db.add(new_executive)
+
+        existing_company_details.remove(random_company)
+
+    db.commit()    
     
         
 if __name__ == "__main__":

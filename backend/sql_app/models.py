@@ -103,6 +103,7 @@ class FundingDetails(Base):
             'leadInvestor': self.lead_investor,
             'company': self.company.to_dict()
         }
+    
 
 class CompanyDetail(Base):
     __tablename__ = "company_detail"
@@ -134,6 +135,8 @@ class CompanyDetail(Base):
     
     category = relationship('Category', back_populates='company_details', foreign_keys=[category_id])
     funding_details = relationship('FundingDetails', back_populates='company')
+    
+    executives = relationship('Executive', back_populates='company')
 
     def to_dict(self):
         return {
@@ -184,7 +187,32 @@ class CompanyDetail(Base):
             'category': self.category.to_dict(),
             'fundingDetails': [funding.to_dict() for funding in self.funding_details]
         }
+    
+class Executive(Base):
+    __tablename__ = 'executives'
 
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name = Column(String, index=True, nullable=False)
+    title = Column(String, index=True, nullable=False)
+    company_detail_id = Column(Integer, ForeignKey('company_detail.id'))
+
+
+    company = relationship('CompanyDetail', back_populates='executives', foreign_keys=[company_detail_id])
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'title': self.title
+        }
+    
+    def to_dict_inclusive(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'title': self.title,
+            'company': self.company.to_dict()
+        }
 
 
 # Category.company_details = relationship('CompanyDetail', back_populates='category')
