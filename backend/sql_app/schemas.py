@@ -18,10 +18,11 @@ class Category(CategoryBase):
         orm_mode = True
 
 
+
 class CompanyDetailBase(BaseModel):
     id: int
     company: str
-    company_url: str = Field(alias='companyUrl')
+    company_url: Optional[str] = Field(alias="companyUrl")
     linkedin_url: Optional[str] = Field(alias='linkedinUrl')
     year_founded: Optional[int] = Field(alias='yearFounded')
     employees: Optional[int] = None
@@ -31,28 +32,27 @@ class CompanyDetailBase(BaseModel):
     subcategory: Optional[str] = None
     customer_industries: Optional[str] = Field(alias='customerIndustries')
     corporate_customers: Optional[str] = Field(alias='corporateCustomers')
-    customer_size: Optional[str] = Field(alias='customerSize')
+    customer_size: Optional[str] = Field(alias='corporateCustomers')
     customer_count: Optional[str] = Field(alias='customerCount')
     tech_stack: Optional[str] = Field(alias='techStack')
     product_integrations: Optional[str] = Field(alias='productIntegrations')
     pricing: Optional[str] = None
     industry_awards: Optional[str] = Field(alias='industryAwards')
     industry_events: Optional[str] = Field(alias='industryEvents')
-    executive_team: Optional[str] = Field(alias='executiveTeam')
-
-    class Config:
-        alias_generator = lambda x: x[0].lower() + x[1:]
-        # allow_population_by_field_name = True
-        populate_by_name = True
 
 class CompanyDetailCreate(CompanyDetailBase):
     pass
 
 class CompanyDetail(CompanyDetailBase):
-    # category: Any  # Use Any for flexibility
-    # funding_details: List[Any] = []  # Use Any for flexibility
+    id: int
+
+    class Config:
+        orm_mode = True
+
+class CompanyDetail(CompanyDetailBase):
+    executives: List['Executive']
     category: Category
-    fundingDetails: List["FundingDetails"] = []
+    fundingDetails: List['FundingDetails']
 
     class Config:
         orm_mode = True
@@ -65,6 +65,31 @@ class CompanyDetail(CompanyDetailBase):
             "funding_details": "fundingDetails"
             # Add more aliases as needed for other fields
         }
+
+
+
+
+
+
+class ExecutiveBase(BaseModel):
+    id: int
+    name: str
+    title: str
+
+class ExecutiveCreate(ExecutiveBase):
+    pass
+
+class Executive(ExecutiveBase):
+    # company: CompanyDetail
+
+    class Config:
+        orm_mode = True
+
+class ExecutiveInclusive(Executive):
+    pass
+
+
+
 
 
 class FundingDetailsBase(BaseModel):
@@ -92,28 +117,6 @@ class FundingDetails(FundingDetailsBase):
 
 
 
-class ExecutiveBase(BaseModel):
-    name: str
-    title: str
-
-class ExecutiveCreate(ExecutiveBase):
-    pass
-
-class Executive(ExecutiveBase):
-    id: int
-    company_detail_id: Optional[int]  # Assuming this is nullable
-
-    class Config:
-        orm_mode = True
-
-class ExecutiveWithCompany(BaseModel):
-    id: int
-    name: str
-    title: str
-    company: CompanyDetail  # Assuming you have already defined the CompanyDetail Pydantic model
-
-    class Config:
-        orm_mode = True
 
 
 # class ItemBase(BaseModel):

@@ -60,6 +60,15 @@ def get_one_company(db: Session, company_id: int):
     company_as_dict = company.to_dict_inclusive()
 
     if company:
+
+        print('')
+        print('')
+        print('')
+        print('GET ONE COMPANY', company_as_dict)
+        print('')
+        print('')
+        print('')
+        print('')
         
         return company_as_dict
     

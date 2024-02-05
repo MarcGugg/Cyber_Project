@@ -137,3 +137,13 @@ def get_funding(funding_id: int, db: Session = Depends(get_db)):
     if funding:
         return funding
     return None
+
+# @app.get("/executives", response_model=schemas.Executive)
+# def get_execs(db: Session = Depends(get_db)):
+#     execs = db.query(models.Executive).all()
+
+#     if execs:
+#         execs_as_dict = [exec.to_dict_inclusive() for exec in execs]
+
+#         return execs_as_dict
+#     return None

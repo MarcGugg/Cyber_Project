@@ -94,7 +94,14 @@ export default function OneCompany() {
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell><h3>Executive Team</h3></TableCell>
-                <TableCell>{company.executiveTeam}</TableCell>
+                {/* <TableCell>{company.executiveTeam}</TableCell> */}
+                {company.executives.length ? 
+                    <TableCell>
+                        {company.executives.map(exec => (
+                            <p>{exec.title}: {exec.name}</p>
+                        ))}
+                    </TableCell>
+                : ''}
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell><h3>HQ Location</h3></TableCell>

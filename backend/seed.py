@@ -45,8 +45,7 @@ def seed_data(db: Session):
             product_integrations=fake.text(),
             pricing=fake.text(),
             industry_awards=fake.text(),
-            industry_events=fake.text(),
-            executive_team=fake.text(),
+            industry_events=fake.text()
         )
 
         db.add(company_detail)

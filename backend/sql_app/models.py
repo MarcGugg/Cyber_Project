@@ -127,7 +127,7 @@ class CompanyDetail(Base):
     pricing = Column(String, index=True, nullable=True)
     industry_awards = Column(String, index=True, nullable=True)
     industry_events = Column(String, index=True, nullable=True)
-    executive_team = Column(String, index=True, nullable=True)
+    # executive_team = Column(String, index=True, nullable=True)
     # category = Column(String, index=True, nullable=True) #this will be a relationship
 
     category_id = Column(Integer, ForeignKey('categories.id'))
@@ -158,8 +158,7 @@ class CompanyDetail(Base):
             'productIntegrations': self.product_integrations,
             'pricing': self.pricing,
             'industryAwards': self.industry_awards,
-            'industryEvents': self.industry_events,
-            'executiveTeam': self.executive_team
+            'industryEvents': self.industry_events
         }
     
     def to_dict_inclusive(self):
@@ -183,7 +182,7 @@ class CompanyDetail(Base):
             'pricing': self.pricing,
             'industryAwards': self.industry_awards,
             'industryEvents': self.industry_events,
-            'executiveTeam': self.executive_team,
+            'executives': [executive.to_dict() for executive in self.executives],
             'category': self.category.to_dict(),
             'fundingDetails': [funding.to_dict() for funding in self.funding_details]
         }
