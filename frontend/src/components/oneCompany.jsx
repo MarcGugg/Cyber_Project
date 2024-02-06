@@ -70,7 +70,14 @@ export default function OneCompany() {
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell><h3>Corporate Customers</h3></TableCell>   
-                <TableCell>{company.corporateCustomers}</TableCell>
+                {/* <TableCell>{company.corporateCustomers}</TableCell> */}
+                {company.corporateCustomers.length ? 
+                <TableCell>
+                    {company.corporateCustomers.map(customer => (
+                        <p>{customer.name}</p>
+                    ))}
+                </TableCell>
+                : ''}
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell><h3>Customer Count</h3></TableCell>
