@@ -28,7 +28,6 @@ def upgrade() -> None:
     op.create_table('funding_details',
         sa.Column('id', sa.Integer(), primary_key=True),
         sa.Column('logo', sa.String()),
-        # sa.Column('company', sa.String()),
         sa.Column('amount_raised', sa.String()),
         sa.Column('date_of_funding', sa.String()),
         sa.Column('funding_round', sa.String()),
@@ -53,7 +52,6 @@ def upgrade() -> None:
         sa.Column('hq_city', sa.String(), nullable=True),
         sa.Column('subcategory', sa.String(), nullable=True),
         sa.Column('customer_industries', sa.String(), nullable=True),
-        sa.Column('corporate_customers', sa.String(), nullable=True),
         sa.Column('customer_size', sa.String(), nullable=True),
         sa.Column('customer_count', sa.String(), nullable=True),
         sa.Column('tech_stack', sa.String(), nullable=True),
@@ -61,12 +59,10 @@ def upgrade() -> None:
         sa.Column('pricing', sa.String(), nullable=True),
         sa.Column('industry_awards', sa.String(), nullable=True),
         sa.Column('industry_events', sa.String(), nullable=True),
-        sa.Column('executive_team', sa.String(), nullable=True),
         sa.Column('category_id', sa.Integer(), sa.ForeignKey('categories.id')),
         sa.Column('category', sa.String()),
-        # sa.Column('funding_details_id', sa.Integer(), sa.ForeignKey('funding_details.id')),
+        
         sa.ForeignKeyConstraint(['category_id'], ['categories.id']),
-        # sa.ForeignKeyConstraint(['funding_details_id'], ['funding_details.id']),
         sa.PrimaryKeyConstraint('id')
     )
     op.create_table('executives',
@@ -80,14 +76,14 @@ def upgrade() -> None:
     )
     
     
-    # op.create_table('corporate_customers',
-    #     sa.Column('id', sa.Integer(), primary_key=True),
-    #     sa.Column('name', sa.String(), nullable=False),
-    #     sa.Column('vendor_id', sa.Integer(), sa.ForeignKey('company_detail.id')),
+    op.create_table('corporate_customers',
+        sa.Column('id', sa.Integer(), primary_key=True),
+        sa.Column('name', sa.String(), nullable=False),
+        sa.Column('vendor_id', sa.Integer(), sa.ForeignKey('company_detail.id')),
 
-    #     sa.ForeignKeyConstraint(['vendor_id'], ['company_detail.id']),
-    #     sa.PrimaryKeyConstraint('id')                
-    # )
+        sa.ForeignKeyConstraint(['vendor_id'], ['company_detail.id']),
+        sa.PrimaryKeyConstraint('id')                
+    )
 
     op.add_column('funding_details', sa.Column('company_detail_id', sa.Integer(), sa.ForeignKey('company_detail.id'))) #this line is necessary for the seeders to work
     
@@ -105,9 +101,9 @@ def downgrade() -> None:
     op.drop_table('funding_details')
     op.drop_table('categories')
     op.drop_table('executives')
-
-    # op.drop_table('corporate_customers')
+    op.drop_table('corporate_customers')
     
-    op.drop_column('funding_details', 'company_detail_id')
+    # op.drop_column('funding_details', 'company_detail_id')
+    
     # op.drop_column('company_detail', 'category_id')
     # op.drop_column('company_detail', 'funding_details_id')

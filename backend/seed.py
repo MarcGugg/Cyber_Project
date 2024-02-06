@@ -1,6 +1,7 @@
 from faker import Faker
 from sqlalchemy.orm import Session
 from sql_app.models import CompanyDetail, FundingDetails, Category, Executive
+from sql_app.models import CorporateCustomer
 import random
 
 fake = Faker()
@@ -38,7 +39,6 @@ def seed_data(db: Session):
             hq_city=fake.city(),
             subcategory=fake.random_element(elements=("Subcategory1", "Subcategory2", "Subcategory3")),
             customer_industries=fake.text(),
-            corporate_customers=fake.text(),
             customer_size=fake.random_element(elements=("Small", "Medium", "Large")),
             customer_count=fake.random_int(min=1, max=1000),
             tech_stack=fake.text(),
@@ -60,7 +60,6 @@ def seed_data(db: Session):
     
         funding_details = FundingDetails(
             logo=fake.url(),  # Assuming logo is a URL, adjust accordingly
-            # company=company_detail.company,
             amount_raised=fake.random_int(min=100000, max=10000000),
             date_of_funding=fake.date_this_decade(),
             funding_round=fake.random_element(elements=("Seed", "Series A", "Series B", "Series C")),
@@ -79,29 +78,10 @@ def seed_data(db: Session):
 
     db.commit()
     
-    # POTENTIAL LOGIC FOR EXECUTIVE TEAM SEEDERS
-    
-    # instantiate a list containing all companies
-    # for loop of 10 (or however many companies exist in the db):
-        # instantiate a list of strings - executive postions ['CEO', 'CFO', 'President', ....etc]
 
-
-        # random_company_variable = select a random company in companies list
-        # nested for loop - the loop runs as many times as the executive position list has elements:
-        
-            # create a new executive:
-                # name = fake.name()
-                # position = random title in executive positions list
-                # company = random_company_variable
-
-            # remove used position from executive position list to avoid re-use in same company 
-            # (i.e company can't have 2 CEOs)
-            
-        # remove random_company_variable from companies list to avoid re-use of same company
     for _ in range(len(existing_company_details)):
         titles = ['CEO', 'CFO', 'President']
         random_company = fake.random_element(existing_company_details)
-        # title = random.choice(titles)
 
         for title in titles:
 
@@ -111,7 +91,6 @@ def seed_data(db: Session):
                 company = random_company
             )
 
-            # titles.remove(title)
             db.add(new_executive)
 
         existing_company_details.remove(random_company)
@@ -119,15 +98,18 @@ def seed_data(db: Session):
     db.commit()
 
     
-    # UNCOMMENT CORPORATE CUSTOMER STUFF AND THEN UNCOMMENT THIS CODE.
-    # REMEMBER TO IMPORT THE CORPORATE CUSTOMER MODEL AT THE TOP OF THIS FILE
     
-    # existing_company_details = db.query(CompanyDetail).all()
-    # for _ in range(10):
-    #     pass
-    #     # create corporate customers and assign them a random company from the
-    #     # existing_company_details list 
-        
+    existing_company_details = db.query(CompanyDetail).all()
+    for _ in range(10):
+
+        corporate_customer = CorporateCustomer(
+            name = fake.company(),
+            vendor = fake.random_element(existing_company_details)
+        )
+
+        db.add(corporate_customer)
+    
+    db.commit()
         
 if __name__ == "__main__":
     # This block ensures that the seeding script is executed only when run directly

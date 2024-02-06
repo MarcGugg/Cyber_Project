@@ -31,8 +31,7 @@ class CompanyDetailBase(BaseModel):
     hq_city: Optional[str] = Field(alias='hqCity')
     subcategory: Optional[str] = None
     customer_industries: Optional[str] = Field(alias='customerIndustries')
-    corporate_customers: Optional[str] = Field(alias='corporateCustomers')
-    customer_size: Optional[str] = Field(alias='corporateCustomers')
+    customer_size: Optional[str] = Field(alias='customerSize')
     customer_count: Optional[str] = Field(alias='customerCount')
     tech_stack: Optional[str] = Field(alias='techStack')
     product_integrations: Optional[str] = Field(alias='productIntegrations')
@@ -53,13 +52,7 @@ class CompanyDetail(CompanyDetailBase):
     executives: List['Executive']
     category: Category
     fundingDetails: List['FundingDetails']
-
-    # COMMENT THIS BACK IN
-    # COMMENT THIS BACK IN
-    # COMMENT THIS BACK IN
-    # COMMENT THIS BACK IN
-    # COMMENT THIS BACK IN
-    # corporateCustomers: List['CorporateCustomer']
+    corporateCustomers: List['CorporateCustomer']
 
     class Config:
         orm_mode = True
@@ -69,30 +62,27 @@ class CompanyDetail(CompanyDetailBase):
 
     class Config:
         fields = {
-            "funding_details": "fundingDetails"
+            "funding_details": "fundingDetails",
+            "corporate_customers": "corporateCustomers"
             # Add more aliases as needed for other fields
         }
 
 
 
-# COMMENT THIS BACK IN
-# COMMENT THIS BACK IN
-# COMMENT THIS BACK IN
-# COMMENT THIS BACK IN
-# COMMENT THIS BACK IN
 
-# class CorporateCustomerBase(BaseModel):
-#     id: int
-#     name: str
 
-# class CorporateCustomerCreate(CorporateCustomerBase):
-#     pass
+class CorporateCustomerBase(BaseModel):
+    id: int
+    name: str
 
-# class CorporateCustomer(CorporateCustomerBase):
-#     vendor: Optional[CompanyDetail] = None
+class CorporateCustomerCreate(CorporateCustomerBase):
+    vendor_id: Optional[int] = None
 
-#     class Config:
-#         orm_mode = True
+class CorporateCustomer(CorporateCustomerBase):
+    vendor: Optional[CompanyDetail] = None
+
+    class Config:
+        orm_mode = True
 
 
 

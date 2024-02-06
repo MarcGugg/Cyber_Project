@@ -51,8 +51,6 @@ class FundingDetails(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     logo = Column(String(150))
-    #company = db.Column(db.String(150), db.ForeignKey('companydetail.company'), primary_key=True)
-    # company = Column(String(150))
     amount_raised = Column(String(150))
     date_of_funding = Column(String(150))
     funding_round = Column(String(150))
@@ -63,14 +61,12 @@ class FundingDetails(Base):
     location = Column(String(150))
     employees = Column(Integer)
     lead_investor = Column(String(150))
-    #round_url = db.Column(db.String(150))
-    # company_id = Column(Integer, ForeignKey('company_detail.id'))
+
     company_detail_id = Column(Integer, ForeignKey('company_detail.id'))
 
 
     company = relationship('CompanyDetail', back_populates='funding_details', foreign_keys=[company_detail_id])
-    # company_detail = relationship('CompanyDetail', back_populates='funding_details', foreign_keys=[company_detail_id], remote_side='CompanyDetail.id')
-
+   
 
     def to_dict(self):
         return {
@@ -119,7 +115,6 @@ class CompanyDetail(Base):
     hq_city = Column(String, index=True, nullable=True)
     subcategory = Column(String, index=True, nullable=True)
     customer_industries = Column(String, index=True, nullable=True) #this may also be a relationship?
-    corporate_customers = Column(String, index=True, nullable=True)
     customer_size = Column(String, index=True, nullable=True)
     customer_count = Column(String, index=True, nullable=True)
     tech_stack = Column(String, index=True, nullable=True)
@@ -127,24 +122,17 @@ class CompanyDetail(Base):
     pricing = Column(String, index=True, nullable=True)
     industry_awards = Column(String, index=True, nullable=True)
     industry_events = Column(String, index=True, nullable=True)
-    # executive_team = Column(String, index=True, nullable=True)
-    # category = Column(String, index=True, nullable=True) #this will be a relationship
+
 
     category_id = Column(Integer, ForeignKey('categories.id'))
-    # funding_details_id = Column(Integer, ForeignKey('funding_details.id'))
+
     
     category = relationship('Category', back_populates='company_details', foreign_keys=[category_id])
     funding_details = relationship('FundingDetails', back_populates='company')
     
     executives = relationship('Executive', back_populates='company')
-    
-    # COMMENT THIS BACK IN
-    # COMMENT THIS BACK IN
-    # COMMENT THIS BACK IN
-    # COMMENT THIS BACK IN
-    # COMMENT THIS BACK IN
-    # COMMENT THIS BACK IN
-    # corporate_customers = relationship('CorporateCustomer', back_populates='vendor')
+ 
+    corporate_customers = relationship('CorporateCustomer', back_populates='vendor')
 
     def to_dict(self):
         return {
@@ -192,9 +180,8 @@ class CompanyDetail(Base):
             'industryEvents': self.industry_events,
             'executives': [executive.to_dict() for executive in self.executives],
             'category': self.category.to_dict(),
-            'fundingDetails': [funding.to_dict() for funding in self.funding_details]
-            # COMMENT THIS BACK IN AND ADD A COMMA TO THE ABOVE LINE
-            # 'corporateCustomers': [customer.to_dict() for customer in self.corporate_customers]
+            'fundingDetails': [funding.to_dict() for funding in self.funding_details],
+            'corporateCustomers': [customer.to_dict() for customer in self.corporate_customers]
         }
     
 class Executive(Base):
@@ -224,35 +211,29 @@ class Executive(Base):
         }
 
 
-# COMMENT THIS BACK IN
-# COMMENT THIS BACK IN
-# COMMENT THIS BACK IN
-# COMMENT THIS BACK IN
-# COMMENT THIS BACK IN
-# COMMENT THIS BACK IN
-# COMMENT THIS BACK IN
+
     
-# class CorporateCustomer(Base):
-#     __tablename__ = 'corporate_customers'
+class CorporateCustomer(Base):
+    __tablename__ = 'corporate_customers'
 
-#     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-#     name = Column(String, index=True, nullable=False)
-#     vendor_id = Column(Integer, ForeignKey('company_detail_id'))
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name = Column(String, index=True, nullable=False)
+    vendor_id = Column(Integer, ForeignKey('company_detail.id'))
 
-#     vendor = relationship('CompanyDetail', back_populates='corporate_customers', foreign_keys=[vendor_id])
+    vendor = relationship('CompanyDetail', back_populates='corporate_customers', foreign_keys=[vendor_id])
 
-#     def to_dict(self):
-#         return {
-#             'id': self.id,
-#             'name': self.name
-#         }
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
     
-#     def to_dict_inclusive(self):
-#         return {
-#             'id': self.id,
-#             'name': self.name,
-#             'vendor': self.vendor.to_dict()
-#         }
+    def to_dict_inclusive(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'vendor': self.vendor.to_dict()
+        }
 
 
 
