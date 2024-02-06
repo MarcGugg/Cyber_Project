@@ -137,6 +137,14 @@ class CompanyDetail(Base):
     funding_details = relationship('FundingDetails', back_populates='company')
     
     executives = relationship('Executive', back_populates='company')
+    
+    # COMMENT THIS BACK IN
+    # COMMENT THIS BACK IN
+    # COMMENT THIS BACK IN
+    # COMMENT THIS BACK IN
+    # COMMENT THIS BACK IN
+    # COMMENT THIS BACK IN
+    # corporate_customers = relationship('CorporateCustomer', back_populates='vendor')
 
     def to_dict(self):
         return {
@@ -185,6 +193,8 @@ class CompanyDetail(Base):
             'executives': [executive.to_dict() for executive in self.executives],
             'category': self.category.to_dict(),
             'fundingDetails': [funding.to_dict() for funding in self.funding_details]
+            # COMMENT THIS BACK IN AND ADD A COMMA TO THE ABOVE LINE
+            # 'corporateCustomers': [customer.to_dict() for customer in self.corporate_customers]
         }
     
 class Executive(Base):
@@ -212,6 +222,38 @@ class Executive(Base):
             'title': self.title,
             'company': self.company.to_dict()
         }
+
+
+# COMMENT THIS BACK IN
+# COMMENT THIS BACK IN
+# COMMENT THIS BACK IN
+# COMMENT THIS BACK IN
+# COMMENT THIS BACK IN
+# COMMENT THIS BACK IN
+# COMMENT THIS BACK IN
+    
+# class CorporateCustomer(Base):
+#     __tablename__ = 'corporate_customers'
+
+#     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+#     name = Column(String, index=True, nullable=False)
+#     vendor_id = Column(Integer, ForeignKey('company_detail_id'))
+
+#     vendor = relationship('CompanyDetail', back_populates='corporate_customers', foreign_keys=[vendor_id])
+
+#     def to_dict(self):
+#         return {
+#             'id': self.id,
+#             'name': self.name
+#         }
+    
+#     def to_dict_inclusive(self):
+#         return {
+#             'id': self.id,
+#             'name': self.name,
+#             'vendor': self.vendor.to_dict()
+#         }
+
 
 
 # Category.company_details = relationship('CompanyDetail', back_populates='category')

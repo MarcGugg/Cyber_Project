@@ -54,6 +54,13 @@ class CompanyDetail(CompanyDetailBase):
     category: Category
     fundingDetails: List['FundingDetails']
 
+    # COMMENT THIS BACK IN
+    # COMMENT THIS BACK IN
+    # COMMENT THIS BACK IN
+    # COMMENT THIS BACK IN
+    # COMMENT THIS BACK IN
+    # corporateCustomers: List['CorporateCustomer']
+
     class Config:
         orm_mode = True
 
@@ -68,6 +75,24 @@ class CompanyDetail(CompanyDetailBase):
 
 
 
+# COMMENT THIS BACK IN
+# COMMENT THIS BACK IN
+# COMMENT THIS BACK IN
+# COMMENT THIS BACK IN
+# COMMENT THIS BACK IN
+
+# class CorporateCustomerBase(BaseModel):
+#     id: int
+#     name: str
+
+# class CorporateCustomerCreate(CorporateCustomerBase):
+#     pass
+
+# class CorporateCustomer(CorporateCustomerBase):
+#     vendor: Optional[CompanyDetail] = None
+
+#     class Config:
+#         orm_mode = True
 
 
 
@@ -80,6 +105,7 @@ class ExecutiveCreate(ExecutiveBase):
     pass
 
 class Executive(ExecutiveBase):
+    # MAKE THIS OPTIONAL BY FOLLOWING WHAT WAS DONE IN FUNDING DETAILS TABLE
     # company: CompanyDetail
 
     class Config:
@@ -113,6 +139,8 @@ class FundingDetails(FundingDetailsBase):
 
     class Config:
         orm_mode = True
+
+
 
 
 

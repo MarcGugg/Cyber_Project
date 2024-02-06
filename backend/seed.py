@@ -116,8 +116,18 @@ def seed_data(db: Session):
 
         existing_company_details.remove(random_company)
 
-    db.commit()    
+    db.commit()
+
     
+    # UNCOMMENT CORPORATE CUSTOMER STUFF AND THEN UNCOMMENT THIS CODE.
+    # REMEMBER TO IMPORT THE CORPORATE CUSTOMER MODEL AT THE TOP OF THIS FILE
+    
+    # existing_company_details = db.query(CompanyDetail).all()
+    # for _ in range(10):
+    #     pass
+    #     # create corporate customers and assign them a random company from the
+    #     # existing_company_details list 
+        
         
 if __name__ == "__main__":
     # This block ensures that the seeding script is executed only when run directly
