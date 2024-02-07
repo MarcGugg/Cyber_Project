@@ -120,7 +120,7 @@ class CompanyDetail(Base):
     tech_stack = Column(String, index=True, nullable=True)
     product_integrations = Column(String, index=True, nullable=True)
     pricing = Column(String, index=True, nullable=True)
-    industry_awards = Column(String, index=True, nullable=True)
+    # industry_awards = Column(String, index=True, nullable=True)
     industry_events = Column(String, index=True, nullable=True)
 
 
@@ -133,6 +133,8 @@ class CompanyDetail(Base):
     executives = relationship('Executive', back_populates='company')
  
     corporate_customers = relationship('CorporateCustomer', back_populates='vendor')
+
+    industry_awards = relationship('IndustryAward', back_populates='company')
 
     def to_dict(self):
         return {
@@ -153,7 +155,7 @@ class CompanyDetail(Base):
             'techStack': self.tech_stack,
             'productIntegrations': self.product_integrations,
             'pricing': self.pricing,
-            'industryAwards': self.industry_awards,
+            # 'industryAwards': self.industry_awards,
             'industryEvents': self.industry_events
         }
     
@@ -176,14 +178,44 @@ class CompanyDetail(Base):
             'techStack': self.tech_stack,
             'productIntegrations': self.product_integrations,
             'pricing': self.pricing,
-            'industryAwards': self.industry_awards,
+            'industryAwards': [award.to_dict() for award in self.industry_awards],
             'industryEvents': self.industry_events,
             'executives': [executive.to_dict() for executive in self.executives],
             'category': self.category.to_dict(),
             'fundingDetails': [funding.to_dict() for funding in self.funding_details],
             'corporateCustomers': [customer.to_dict() for customer in self.corporate_customers]
         }
+
+class IndustryAward(Base):
+    __tablename__ = 'industry_awards'
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name = Column(String, index=True, nullable=False)
+    year = Column(Integer, index=True, nullable=True)
+    issuing_organization = Column(String, index=True, nullable=True)
     
+    company_detail_id = Column(Integer, ForeignKey('company_detail.id'))
+
+    company = relationship('CompanyDetail', back_populates='industry_awards', foreign_keys=[company_detail_id])
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'year': self.year,
+            'issuingOrg': self.issuing_organization
+        }
+    
+    def to_dict_inclusive(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'year': self.year,
+            'issuingOrg': self.issuing_organization,
+            'company': self.company.to_dict()
+        }
+
+
 class Executive(Base):
     __tablename__ = 'executives'
 

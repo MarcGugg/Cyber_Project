@@ -1,7 +1,7 @@
 from faker import Faker
 from sqlalchemy.orm import Session
 from sql_app.models import CompanyDetail, FundingDetails, Category, Executive
-from sql_app.models import CorporateCustomer
+from sql_app.models import CorporateCustomer, IndustryAward
 import random
 
 fake = Faker()
@@ -44,7 +44,7 @@ def seed_data(db: Session):
             tech_stack=fake.text(),
             product_integrations=fake.text(),
             pricing=fake.text(),
-            industry_awards=fake.text(),
+            # industry_awards=fake.text(),
             industry_events=fake.text()
         )
 
@@ -109,6 +109,28 @@ def seed_data(db: Session):
 
         db.add(corporate_customer)
     
+    db.commit()
+
+
+    award_categories = ['Best', 'Outstanding', 'Exceptional', 'Remarkable', 'Innovative', 'Creative', 'Inspiring', 'Top', 'Superb']
+
+# Define a list of possible award types
+    award_types = ['Achievement', 'Performance', 'Excellence', 'Contribution', 'Innovation', 'Leadership', 'Service', 'Collaboration', 'Impact']
+
+
+    for _ in range(10):
+        award_category = fake.random_element(award_categories)
+        award_type = fake.random_element(award_types)
+
+        new_award = IndustryAward(
+            name = award_category + ' ' + award_type,
+            year = random.randint(1980, 2024),
+            issuing_organization = fake.company(),
+            company = fake.random_element(existing_company_details)
+        )
+
+        db.add(new_award)
+
     db.commit()
         
 if __name__ == "__main__":

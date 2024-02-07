@@ -36,7 +36,7 @@ class CompanyDetailBase(BaseModel):
     tech_stack: Optional[str] = Field(alias='techStack')
     product_integrations: Optional[str] = Field(alias='productIntegrations')
     pricing: Optional[str] = None
-    industry_awards: Optional[str] = Field(alias='industryAwards')
+    # industry_awards: Optional[str] = Field(alias='industryAwards')
     industry_events: Optional[str] = Field(alias='industryEvents')
 
 class CompanyDetailCreate(CompanyDetailBase):
@@ -53,6 +53,7 @@ class CompanyDetail(CompanyDetailBase):
     category: Category
     fundingDetails: List['FundingDetails']
     corporateCustomers: List['CorporateCustomer']
+    industryAwards: List['IndustryAward']
 
     class Config:
         orm_mode = True
@@ -63,9 +64,31 @@ class CompanyDetail(CompanyDetailBase):
     class Config:
         fields = {
             "funding_details": "fundingDetails",
-            "corporate_customers": "corporateCustomers"
+            "corporate_customers": "corporateCustomers",
+            "industry_awards": "industryAwards"
             # Add more aliases as needed for other fields
         }
+
+
+
+
+
+class IndustryAwardBase(BaseModel):
+    id: int
+    name: str
+    year: int
+    issuing_organization: Optional[str] = Field(alias='issuingOrg')
+
+class IndustryAwardCreate(IndustryAwardBase):
+    # company_detail_id = Optional[int] = None
+    pass
+
+class IndustryAward(IndustryAwardBase):
+    company: Optional[CompanyDetail] = None
+
+    class Config:
+        orm_mode = True
+
 
 
 
@@ -83,6 +106,8 @@ class CorporateCustomer(CorporateCustomerBase):
 
     class Config:
         orm_mode = True
+
+
 
 
 

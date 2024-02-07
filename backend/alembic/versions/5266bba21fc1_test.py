@@ -85,6 +85,17 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint('id')                
     )
 
+    op.create_table('industry_awards',
+        sa.Column('id', sa.Integer(), primary_key=True),
+        sa.Column('name', sa.String(), nullable=False),
+        sa.Column('year', sa.Integer()),
+        sa.Column('issuing_organization', sa.String()),
+        sa.Column('company_detail_id', sa.Integer(), sa.ForeignKey('company_detail.id')),
+
+        sa.ForeignKeyConstraint(['company_detail_id'], ['company_detail.id']),
+        sa.PrimaryKeyConstraint('id')
+    )
+
     op.add_column('funding_details', sa.Column('company_detail_id', sa.Integer(), sa.ForeignKey('company_detail.id'))) #this line is necessary for the seeders to work
     
     op.add_column('company_detail', sa.Column('category_id', sa.Integer(), sa.ForeignKey('categories.id')))
@@ -102,6 +113,7 @@ def downgrade() -> None:
     op.drop_table('categories')
     op.drop_table('executives')
     op.drop_table('corporate_customers')
+    op.drop_table('industry_awards')
     
     # op.drop_column('funding_details', 'company_detail_id')
     
