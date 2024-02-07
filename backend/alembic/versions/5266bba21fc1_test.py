@@ -108,12 +108,12 @@ def upgrade() -> None:
 
 
 def downgrade() -> None:
+    op.drop_table('industry_awards')
+    op.drop_table('corporate_customers')
+    op.drop_table('executives')
     op.drop_table('company_detail')
     op.drop_table('funding_details')
     op.drop_table('categories')
-    op.drop_table('executives')
-    op.drop_table('corporate_customers')
-    op.drop_table('industry_awards')
     
     # op.drop_column('funding_details', 'company_detail_id')
     
