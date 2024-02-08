@@ -118,7 +118,17 @@ export default function OneCompany() {
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell><h3>Industry Awards</h3></TableCell>
-                <TableCell>{company.industryAwards}</TableCell>
+                {/* <TableCell>{company.industryAwards}</TableCell> */}
+                {company.industryAwards.length ? 
+                    <TableCell>
+                        {company.industryAwards.map(award => (
+                            <p>Award: {award.name},
+                            Year Issued: {award.year},
+                            Issued by: {award.issuingOrg}
+                            </p>
+                        ))}
+                    </TableCell>
+                : ''}
             </TableRow>
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell><h3>Industry Events</h3></TableCell>
