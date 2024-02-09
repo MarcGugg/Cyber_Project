@@ -14,7 +14,7 @@ SETUP INSTRUCTIONS:
        - the docs: https://faker.readthedocs.io/en/master/
 
 3. Once all the dependencies are installed, in order to get the backend up and running, you will need to do the following:
-  - Go into the backend/alembic/versions directory. there should be a file with a .py whose name is a random string of characters:
+  - Go into the backend/alembic/versions directory. there should be a .py file whose name is a random string of characters:
     ![image](https://github.com/MarcGugg/Cyber_Project/assets/109707298/b8ffff02-4916-458a-94dd-0c0673e04030)
   - There should be a variable called 'revision' that is assigned to a random string of characters:
     ![image](https://github.com/MarcGugg/Cyber_Project/assets/109707298/4fddcf03-315c-4239-a004-1d262844d7ee)
