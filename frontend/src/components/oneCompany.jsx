@@ -123,7 +123,7 @@ export default function OneCompany() {
                     <TableCell>
                         {company.industryAwards.map(award => (
                             <p>Award: {award.name},
-                            Year Issued: {award.year},
+                            Year Issued: {award.year},  
                             Issued by: {award.issuingOrg}
                             </p>
                         ))}
