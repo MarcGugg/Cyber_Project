@@ -71,6 +71,18 @@ class CompanyDetail(CompanyDetailBase):
 
 
 
+# class IndustryEventBase(BaseModel):
+#     id: int
+#     name: int
+#     year: int
+
+# class IndustryEventCreate(IndustryEventBase):
+#     pass
+
+# class IndustryEvent(IndustryEventBase):
+#     participants: Optional[CompanyDetail] = None
+
+
 
 
 class IndustryAwardBase(BaseModel):
