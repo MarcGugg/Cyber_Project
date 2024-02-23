@@ -24,6 +24,12 @@ from .database import Base
 #     owner_id = Column(Integer, ForeignKey("users.id"))
 
 #     owner = relationship("User", back_populates="items")
+
+
+
+# TODO make a seperate industry events table? Relationship w CompanyDetail
+
+
 class Category(Base):
     __tablename__ = 'categories'
 
