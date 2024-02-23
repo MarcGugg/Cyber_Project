@@ -42,6 +42,7 @@ SETUP INSTRUCTIONS:
 5. For component styling (as sparse as it is), I use MaterialUI. To install, follow this guide: https://mui.com/material-ui/getting-started/installation/
 6. By the end of the installations, your package.json should look like this:
    ![image](https://github.com/MarcGugg/Cyber_Project/assets/109707298/1e2d7a3f-0bb9-4553-bbcb-2be0ff053a72)
+7. To make HTTP requests from the frontend, axios is used. To install: npm i axios
 
 P.S If you have any issues with react, I use vite + react. to install, run this command: npm create vite@latest
  - tutorial: https://vitejs.dev/guide/
