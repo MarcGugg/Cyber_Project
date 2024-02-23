@@ -70,7 +70,7 @@ class CompanyDetail(CompanyDetailBase):
         }
 
 
-
+# potential logic for IndustryEvent table
 # class IndustryEventBase(BaseModel):
 #     id: int
 #     name: int
