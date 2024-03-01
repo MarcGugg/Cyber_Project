@@ -28,6 +28,7 @@ from .database import Base
 
 
 # TODO make a seperate industry events table? Relationship w CompanyDetail
+# TODO implement products table. relationship with companies
 
 
 class Category(Base):
