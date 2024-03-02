@@ -151,6 +151,7 @@ class ExecutiveCreate(ExecutiveBase):
 class Executive(ExecutiveBase):
     # MAKE THIS OPTIONAL BY FOLLOWING WHAT WAS DONE IN FUNDING DETAILS TABLE
     # company: CompanyDetail
+    company: Optional[CompanyDetail] = None
 
     class Config:
         orm_mode = True
