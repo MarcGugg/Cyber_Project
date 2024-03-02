@@ -81,6 +81,23 @@ class CompanyDetail(CompanyDetailBase):
 
 # class IndustryEvent(IndustryEventBase):
 #     participants: Optional[CompanyDetail] = None
+        
+
+
+
+# potential logic for Product table
+# class ProductBase(BaseModel):
+#     id: int
+#     name: int
+
+# class ProductCreate(ProductBase):
+#     pass
+
+# class Product(ProductBase):
+#     company: Optional[CompanyDetail] = None
+
+#     class Config:
+#         orm_mode = True
 
 
 
