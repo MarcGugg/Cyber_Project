@@ -192,7 +192,8 @@ class CompanyDetail(Base):
             'executives': [executive.to_dict() for executive in self.executives],
             'category': self.category.to_dict(),
             'fundingDetails': [funding.to_dict() for funding in self.funding_details],
-            'corporateCustomers': [customer.to_dict() for customer in self.corporate_customers]
+            'corporateCustomers': [customer.to_dict() for customer in self.corporate_customers],
+            'products': [product.to_dict() for product in self.products]
         }
     
 class Product(Base):
