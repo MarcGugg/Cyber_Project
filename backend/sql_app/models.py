@@ -211,6 +211,13 @@ class Product(Base):
             'id': self.id,
             'name': self.name
         }
+    
+    def to_dict_inclusive(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'company': self.company.to_dict()
+        }
 
 
 class IndustryAward(Base):
