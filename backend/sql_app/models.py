@@ -143,6 +143,8 @@ class CompanyDetail(Base):
 
     industry_awards = relationship('IndustryAward', back_populates='company')
 
+    products = relationship('Product', back_populates='company')
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -192,6 +194,17 @@ class CompanyDetail(Base):
             'fundingDetails': [funding.to_dict() for funding in self.funding_details],
             'corporateCustomers': [customer.to_dict() for customer in self.corporate_customers]
         }
+    
+class Product(Base):
+    __tablename__ = 'products'
+    
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name = Column(String, index=True, nullable=False)
+
+    company_detail_id = Column(Integer, ForeignKey('company_detail.id'))
+
+    company = relationship('CompanyDetail', back_populates='products', foreign_keys=[company_detail_id])
+
 
 class IndustryAward(Base):
     __tablename__ = 'industry_awards'
