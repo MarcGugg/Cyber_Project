@@ -164,7 +164,6 @@ class CompanyDetail(Base):
             'techStack': self.tech_stack,
             'productIntegrations': self.product_integrations,
             'pricing': self.pricing,
-            # 'industryAwards': self.industry_awards,
             'industryEvents': self.industry_events
         }
     
