@@ -206,6 +206,12 @@ class Product(Base):
 
     company = relationship('CompanyDetail', back_populates='products', foreign_keys=[company_detail_id])
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
+
 
 class IndustryAward(Base):
     __tablename__ = 'industry_awards'
