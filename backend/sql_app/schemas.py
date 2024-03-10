@@ -70,6 +70,21 @@ class CompanyDetail(CompanyDetailBase):
         }
 
 
+
+class ProductBase(BaseModel):
+    id: int
+    name: str
+
+class ProductCreate(ProductBase):
+    pass
+
+class Product(ProductBase):
+    company: Optional[CompanyDetail] = None
+
+    class Config:
+        orm_mode = True
+
+
 # potential logic for IndustryEvent table
 # class IndustryEventBase(BaseModel):
 #     id: int

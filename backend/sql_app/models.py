@@ -30,6 +30,7 @@ from .database import Base
 # TODO make a seperate industry events table? Relationship w CompanyDetail
 # TODO implement products table. relationship with companies - DONE
 # TODO implement products table into pydantic models
+# TODO modify migrations and seeders to include products table
 
 
 class Category(Base):
