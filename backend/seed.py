@@ -1,7 +1,7 @@
 from faker import Faker
 from sqlalchemy.orm import Session
 from sql_app.models import CompanyDetail, FundingDetails, Category, Executive
-from sql_app.models import CorporateCustomer, IndustryAward
+from sql_app.models import CorporateCustomer, IndustryAward, Product
 import random
 
 fake = Faker()
@@ -53,6 +53,21 @@ def seed_data(db: Session):
     db.commit()
 
     existing_company_details = db.query(CompanyDetail).all()
+
+    product_names = [fake.word() for _ in range(random.randint(40, 60))]
+
+    for _ in range(random.randrange(51)):
+        
+        company_detail = fake.random_element(existing_company_details)
+
+        product = Product(
+            name = fake.random_element(elements=product_names),
+            company = company_detail
+        )
+
+        db.add(product)
+
+    db.commit()
 
     for _ in range(10):
 
